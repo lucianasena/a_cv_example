@@ -20,18 +20,47 @@
     colorlinks = true,
 }
 
-% \renewcommand*{\acvHeaderIconSep}{}
+\RequirePackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{5cm}
+\newenvironment{aside}{%
+  \let\oldsection\section
+  \renewcommand{\section}[1]{
+    \par\vspace{\baselineskip}{\Large\headingfont\color{pblue} ##1}
+  }
+  \begin{textblock}{4}(2.0, 0.60)
+  \begin{flushright}
+  \obeycr
+}{%
+  \restorecr
+  \end{flushright}
+  \end{textblock}
+  \let\section\oldsection
+}
+
+
 
 \begin{document}
 \noindent
+\begin{flushright}
 \textsc{\huge Name Lastname}\\
-\emph{Ocupation}        \hfill      \faPhone        \space  \footnotesize{\texttt{() 5454-4545}\\
-Address                 \hfill      \faEnvelope     \space  \href{mailto:email}{email}\\
-Country                 \hfill      \faLinkedin     \space  \href{linkedin}{linkedin}}\\[.2cm]
-{\color{Black} \par\noindent\rule{\textwidth}{0.4pt} }
+\emph{Ocupation}
+\end{flushright}
+
+% \emph{Ocupation}        \hfill      \faPhone        \space  \footnotesize{\texttt{() 5454-4545}\\
+% Address                 \hfill      \faEnvelope     \space  \href{mailto:email}{email}\\
+% Country                 \hfill      \faLinkedin     \space  \href{linkedin}{linkedin}}\\[.2cm]
+% {\color{Black} \par\noindent\rule{\textwidth}{0.4pt} }
 
 
 \onehalfspacing
+\begin{aside}
+\input{about.tex}
+\input{skills.tex}
+\end{aside}
+
+\input{experience.tex}
+\input{other_activities.tex}
 
 
 \end{document}
