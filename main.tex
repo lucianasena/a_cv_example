@@ -1,0 +1,37 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}                                       %Changes the margin
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{fontawesome}
+
+
+\defaultfontfeatures{Mapping=tex-text}
+\setmainfont[
+        BoldFont = {Libertine_bold.ttf},
+        ItalicFont = {Libertine_italic.ttf},
+    ]{Libertine.ttf}
+
+\hypersetup{
+    colorlinks = true,
+}
+
+% \renewcommand*{\acvHeaderIconSep}{}
+
+\begin{document}
+\noindent
+\textsc{\huge Name Lastname}\\
+\emph{Ocupation}        \hfill      \faPhone        \space  \footnotesize{\texttt{() 5454-4545}\\
+Address                 \hfill      \faEnvelope     \space  \href{mailto:email}{email}\\
+Country                 \hfill      \faLinkedin     \space  \href{linkedin}{linkedin}}\\[.2cm]
+{\color{Black} \par\noindent\rule{\textwidth}{0.4pt} }
+
+
+\onehalfspacing
+
+
+\end{document}
