@@ -1,4 +1,4 @@
-# https://img.shields.io/badge/pipeline-passed-green.svg About
+# About
 A simple Curriculum Vitae model in LaTeX. Still working on new features!
 
 This project includes:
