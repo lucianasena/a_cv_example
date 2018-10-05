@@ -1,4 +1,4 @@
-# About
+# https://img.shields.io/badge/pipeline-passed-green.svg About
 A simple Curriculum Vitae model in LaTeX. Still working on new features!
 
 This project includes:
@@ -11,8 +11,7 @@ This project includes:
 # Requirements
 As this model uses a different font called [`Libertine`](http://libertine-fonts.org/), XeLaTeX is needed. :)
 
-To install in Linux, run the following command: 
+To install in Linux: 
 ```
 sudo apt-get install texlive-xetex
 ```
-
