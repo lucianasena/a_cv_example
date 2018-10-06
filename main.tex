@@ -1,6 +1,42 @@
-\documentclass[11pt, a4paper]{article}
+\documentclass[9pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{fullpage}                                       %Changes the margin
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----ONLY FOR GENERATING DUMMY TEXT. REMOVE IT WHEN YOU FILL YOUR DATA CORRECTLY----%
+%thanks to https://tex.stackexchange.com/questions/254901/one-sentence-of-dummy-text%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{lipsum}
+\usepackage{xparse}
+
+\UnpackLipsum[1-100]
+\ExplSyntaxOn
+% unpack \lipsumexp
+\seq_new:N \g_lipsum_sentences_seq
+\cs_generate_variant:Nn \seq_set_split:Nnn { NnV }
+\seq_gset_split:NnV \g_lipsum_sentences_seq {.~} \lipsumexp
+
+\NewDocumentCommand{\lipsumsentence}{>{\SplitArgument{1}{-}}O{1-7}}
+ {
+  \lipsumsentenceaux #1
+ }
+\NewDocumentCommand{\lipsumsentenceaux}{mm}
+ {
+  \IfNoValueTF { #2 }
+   {
+    \seq_item:Nn \g_lipsum_sentences_seq { #1 }.~
+   }
+   {
+    \int_step_inline:nnnn { #1 } { 1 } { #2 }
+     {
+      \seq_item:Nn \g_lipsum_sentences_seq { ##1 }.~
+     }
+   }
+ }
+\ExplSyntaxOff
+%------------------------------------------------------------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{fontspec}
@@ -8,57 +44,44 @@
 \usepackage{setspace}
 \usepackage{hyperref}
 \usepackage{fontawesome}
-
+\usepackage{libertine} 
+\usepackage{geometry} 
+\geometry{a4paper, textwidth = 6in, textheight = 8.5in, marginparsep = 4pt, marginparwidth = .6in}
+\setlength\parindent{0in}
 
 \defaultfontfeatures{Mapping=tex-text}
-\setmainfont[
-        BoldFont = {Libertine_bold.ttf},
-        ItalicFont = {Libertine_italic.ttf},
-    ]{Libertine.ttf}
+\setromanfont[Ligatures = {Common}, 
+            Numbers = {OldStyle}, 
+            Variant = 01]{Linux Libertine O}
+
 
 \hypersetup{
     colorlinks = true,
 }
 
-\RequirePackage[absolute,overlay]{textpos}
-\setlength{\TPHorizModule}{1cm}
-\setlength{\TPVertModule}{5cm}
-\newenvironment{aside}{%
-  \let\oldsection\section
-  \renewcommand{\section}[1]{
-    \par\vspace{\baselineskip}{\Large\headingfont\color{pblue} ##1}
-  }
-  \begin{textblock}{4}(2.0, 0.60)
-  \begin{flushright}
-  \obeycr
-}{%
-  \restorecr
-  \end{flushright}
-  \end{textblock}
-  \let\section\oldsection
-}
 
+\usepackage{marginnote}
+\newcommand{\amper{}}{\chardef\amper="E0BD }
+\newcommand{\years}[1]{\marginnote{\footnotesize #1}}
+\renewcommand*{\raggedleftmarginnote}{}
+\setlength{\marginparsep}{1pt}
+\reversemarginpar
 
 
 \begin{document}
 \noindent
-\begin{flushright}
-\textsc{\huge Name Lastname}\\
-\emph{Ocupation}
-\end{flushright}
 
-% \emph{Ocupation}        \hfill      \faPhone        \space  \footnotesize{\texttt{() 5454-4545}\\
-% Address                 \hfill      \faEnvelope     \space  \href{mailto:email}{email}\\
-% Country                 \hfill      \faLinkedin     \space  \href{linkedin}{linkedin}}\\[.2cm]
-% {\color{Black} \par\noindent\rule{\textwidth}{0.4pt} }
+\begin{flushleft}
+\textsc{\huge Name Lastname}\\[.2cm]
+\emph{\large Ocupation}                \hfill      \faPhone        \space  \footnotesize{\texttt{() 5454-4545}}\\
+\faMapMarker \space Address             \hfill      \faEnvelope     \space  \href{mailto:email}{email}\\
+Country                                 \hfill      \faLinkedin     \space  \href{linkedin}{linkedin}\\[.2cm]
+\end{flushleft}
 
 
 \onehalfspacing
-\begin{aside}
-\input{about.tex}
+\input{education.tex}
 \input{skills.tex}
-\end{aside}
-
 \input{experience.tex}
 \input{other_activities.tex}
 
